@@ -1,0 +1,22 @@
+{
+  "name": "@polymeerxyz/app",
+  "version": "1.0.0",
+  "scripts": {
+    "package:ui": "node -r ts-node/register ./src/package.ts",
+    "upload:ui": "node -r ts-node/register ./src/upload.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "eslint": "^8",
+    "eslint-plugin-simple-import-sort": "^12",
+    "ts-node": "^10",
+    "typescript": "^5"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@ckb-lumos/common-scripts@0.22.2": "patches/@ckb-lumos__common-scripts@0.22.2.patch"
+    }
+  }
+}

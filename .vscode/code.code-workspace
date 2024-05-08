@@ -1,0 +1,40 @@
+{
+  "folders": [
+    {
+      "name": "ROOT",
+      "path": "../",
+    },
+    {
+      "name": "hardware",
+      "path": "../packages/hardware",
+    },
+    {
+      "name": "lib",
+      "path": "../packages/lib",
+    },
+    {
+      "name": "token",
+      "path": "../packages/token",
+    },
+    {
+      "name": "ui",
+      "path": "../packages/ui",
+    },
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always",
+    },
+    "editor.quickSuggestions": {
+      "strings": "on",
+    },
+    "eslint.format.enable": true,
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "[xml]": {
+      "editor.defaultFormatter": "DotJoshJohnson.xml",
+    },
+  },
+}

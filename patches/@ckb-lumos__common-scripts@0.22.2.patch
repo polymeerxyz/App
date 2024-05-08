@@ -1,0 +1,26 @@
+diff --git a/lib/secp256k1_blake160.js b/lib/secp256k1_blake160.js
+index 3a6dec05c634b31dd44e831a81bcd8f0611e9ccb..23701db0f8609a9d6c63168a1144a426209e0b5b 100644
+--- a/lib/secp256k1_blake160.js
++++ b/lib/secp256k1_blake160.js
+@@ -280,7 +280,8 @@ async function transferCompatible(txSkeleton, fromAddress, toAddress, amount, {
+       throw new Error("Cell provider is missing!");
+     }
+     const cellCollector = cellProvider.collector({
+-      lock: fromScript
++      lock: fromScript,
++      type: "empty"
+     });
+     const changeCell = {
+       cellOutput: {
+diff --git a/src/secp256k1_blake160.ts b/src/secp256k1_blake160.ts
+index 84b59a64ade3fcc337218cfe63489e7a337b0bd7..8aaa43c7a2d6174ebb3b6f7597a22ffb6a9da889 100644
+--- a/src/secp256k1_blake160.ts
++++ b/src/secp256k1_blake160.ts
+@@ -418,6 +418,7 @@ export async function transferCompatible(
+     }
+     const cellCollector = cellProvider.collector({
+       lock: fromScript,
++      type: "empty",
+     });
+     const changeCell: Cell = {
+       cellOutput: {

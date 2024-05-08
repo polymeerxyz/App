@@ -1,0 +1,56 @@
+{
+  "name": "@polymeerxyz/lib",
+  "version": "1.0.0",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin typescript",
+    "test": "ava tests/address.test.ts --timeout=2m"
+  },
+  "dependencies": {
+    "@ckb-lumos/base": "0.22.2",
+    "@ckb-lumos/bi": "0.22.2",
+    "@ckb-lumos/ckb-indexer": "0.22.2",
+    "@ckb-lumos/codec": "0.22.2",
+    "@ckb-lumos/common-scripts": "0.22.2",
+    "@ckb-lumos/config-manager": "0.22.2",
+    "@ckb-lumos/hd": "0.22.2",
+    "@ckb-lumos/helpers": "0.22.2",
+    "@ckb-lumos/rpc": "0.22.2",
+    "@ledgerhq/hw-transport": "^6",
+    "@polymeerxyz/hardware": "workspace:*",
+    "bip32-path": "0.4.2",
+    "bip32": "4.0.0",
+    "bip39": "3.1.0",
+    "bitcoinjs-lib": "6.1.5",
+    "ecpair": "2.1.0",
+    "tiny-secp256k1": "2.2.3"
+  },
+  "devDependencies": {
+    "@ledgerhq/hw-transport-mocker": "^6",
+    "@ledgerhq/hw-transport-node-hid": "^6",
+    "@rollup/plugin-commonjs": "^25",
+    "@rollup/plugin-json": "^6",
+    "@rollup/plugin-typescript": "^11",
+    "@types/node": "^20",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "ava": "^6",
+    "eslint": "^8",
+    "eslint-plugin-simple-import-sort": "^12",
+    "rollup": "^4",
+    "ts-node": "^10",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "immutable": "4.x"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
+}
