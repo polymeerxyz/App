@@ -1,4 +1,4 @@
-import { CellService, DaoService, TransactionService } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { useCallback, useRef } from "react";
 
 import { getLedgerDevice } from "@/lib/ledger";
@@ -9,21 +9,21 @@ export const useCellService = () => {
   const {
     ckb: { config, indexer, rpc },
   } = useAppContext();
-  return useRef(new CellService(config, indexer, rpc));
+  return useRef(new ckb.CellService(config, indexer, rpc));
 };
 
 export const useDaoService = () => {
   const {
     ckb: { config, indexer, rpc },
   } = useAppContext();
-  return useRef(new DaoService(config, indexer, rpc));
+  return useRef(new ckb.DaoService(config, indexer, rpc));
 };
 
 export const useTransactionService = () => {
   const {
     ckb: { config, indexer, rpc },
   } = useAppContext();
-  return useRef(new TransactionService(config, indexer, rpc));
+  return useRef(new ckb.TransactionService(config, indexer, rpc));
 };
 
 export const useLedgerDevice = () => {

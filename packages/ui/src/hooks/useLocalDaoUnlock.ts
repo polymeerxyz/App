@@ -1,4 +1,4 @@
-import { DaoType, FeeRate } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { useCallback } from "react";
 
 import { useActiveAddress } from "@/hooks/useActiveAddress";
@@ -11,10 +11,10 @@ export const useLocalDaoUnlock = () => {
   const loadPrivateKey = useLoadPrivateKey();
 
   return useCallback(
-    async ({ hash }: { hash: string }, feeRate = FeeRate.NORMAL) => {
+    async ({ hash }: { hash: string }, feeRate = ckb.FeeRate.NORMAL) => {
       const [depositCell, withdrawCell] = await daoService.current.prepareDaoCells(
         { txHash: hash, index: "0x0" },
-        DaoType.WITHDRAW,
+        ckb.DaoType.WITHDRAW,
       );
       const txSkeleton = await daoService.current.unlock({
         depositCell,

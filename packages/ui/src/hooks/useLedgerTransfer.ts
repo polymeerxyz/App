@@ -1,6 +1,6 @@
 import { parseUnit } from "@ckb-lumos/bi";
 import { TransactionSkeletonType } from "@ckb-lumos/helpers";
-import { FeeRate, FeeType } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { useCallback } from "react";
 
 import { useActiveAddress } from "@/hooks/useActiveAddress";
@@ -15,8 +15,8 @@ export const useLedgerTransfer = () => {
   return useCallback(
     async (
       { token, to, amount }: { token: SupportedToken; to: string; amount: string },
-      feeRate = FeeRate.NORMAL,
-      feeType: FeeType = "sender",
+      feeRate = ckb.FeeRate.NORMAL,
+      feeType: ckb.FeeType = "sender",
     ) => {
       const ledgerDevice = await getLedgerDevice();
 

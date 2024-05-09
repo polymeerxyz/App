@@ -3,7 +3,6 @@ import {
   AccountExtendedPublicKey,
   AddressType,
   ExtendedPrivateKey,
-  Keychain,
   Keystore,
   mnemonic as mnemonicLib,
 } from "@ckb-lumos/hd";
@@ -12,11 +11,8 @@ import { publicKeyToAddress, publicKeyToLegacyAddress } from "../address";
 
 export function createPrivateKey(mnemonic: string, password: string) {
   const seed = mnemonicLib.mnemonicToSeedSync(mnemonic);
-  const masterKeychain = Keychain.fromSeed(seed);
-  const extendedPrivateKey = new ExtendedPrivateKey(
-    "0x" + masterKeychain.privateKey.toString("hex"),
-    "0x" + masterKeychain.chainCode.toString("hex"),
-  );
+  const extendedPrivateKey = ExtendedPrivateKey.fromSeed(seed);
+
   const serializedAccountExtendedPublicKey = extendedPrivateKey
     .toAccountExtendedPublicKey()
     .serialize();
@@ -46,7 +42,7 @@ export function derivePrivateKey(
 
 export function getAddress(
   serializedAccountExtendedPublicKey: string,
-  addressType: AddressType,
+  type: AddressType,
   index: number,
   config: Config,
 ) {
@@ -55,18 +51,13 @@ export function getAddress(
   );
 
   return {
-    full: publicKeyToAddress(
-      accountExtendedPublicKey,
-      addressType,
-      index,
-      config,
-    ),
+    full: publicKeyToAddress(accountExtendedPublicKey, type, index, config),
     legacy: publicKeyToLegacyAddress(
       accountExtendedPublicKey,
-      addressType,
+      type,
       index,
       config,
     ),
-    path: AccountExtendedPublicKey.pathFor(addressType, index),
+    path: AccountExtendedPublicKey.pathFor(type, index),
   };
 }

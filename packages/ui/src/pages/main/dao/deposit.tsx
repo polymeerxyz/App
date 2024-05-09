@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FeeRate } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { Loader2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -47,14 +47,14 @@ export default function DepositPage() {
           {
             amount: data.amount,
           },
-          FeeRate.NORMAL,
+          ckb.FeeRate.NORMAL,
         );
       } else {
         await ledgerDaoDeposit(
           {
             amount: data.amount,
           },
-          FeeRate.NORMAL,
+          ckb.FeeRate.NORMAL,
         );
       }
     } catch (error) {

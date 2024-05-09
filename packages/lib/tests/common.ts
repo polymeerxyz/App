@@ -13,14 +13,14 @@ export const ckb = (() => {
     : "https://testnet.ckbapp.dev/";
   const rpc = new RPC(url);
   const indexer = new Indexer(url);
-
   const config = getConfig(mainnet);
-  const extendedPrivateKey = ExtendedPrivateKey.parse(fixtures.privateKey);
 
   return {
     rpc,
     indexer,
     config,
-    extendedPrivateKey,
+    extendedPrivateKey: fixtures.privateKey
+      ? ExtendedPrivateKey.parse(fixtures.privateKey)
+      : undefined,
   };
 })();

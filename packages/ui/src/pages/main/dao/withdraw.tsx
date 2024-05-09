@@ -1,4 +1,4 @@
-import { DaoType, FeeRate } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { ExternalLink, Loader2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -44,9 +44,9 @@ export default function WithdrawPage() {
     try {
       setLoading(true);
       if (isLocal) {
-        await localDaoUnlock({ hash: hash! }, FeeRate.NORMAL);
+        await localDaoUnlock({ hash: hash! }, ckb.FeeRate.NORMAL);
       } else {
-        await ledgerDaoUnlock({ hash: hash! }, FeeRate.NORMAL);
+        await ledgerDaoUnlock({ hash: hash! }, ckb.FeeRate.NORMAL);
       }
     } catch (error) {
       console.error(error);
@@ -59,9 +59,9 @@ export default function WithdrawPage() {
     try {
       setLoading(true);
       if (isLocal) {
-        await localDaoWithdraw({ hash: hash! }, FeeRate.NORMAL);
+        await localDaoWithdraw({ hash: hash! }, ckb.FeeRate.NORMAL);
       } else {
-        await ledgerDaoWithdraw({ hash: hash! }, FeeRate.NORMAL);
+        await ledgerDaoWithdraw({ hash: hash! }, ckb.FeeRate.NORMAL);
       }
     } catch (error) {
       console.error(error);
@@ -88,13 +88,13 @@ export default function WithdrawPage() {
             </Link>
           </Button>
         </div>
-        {searchParams.get("type") === DaoType.DEPOSIT.toString() && (
+        {searchParams.get("type") === ckb.DaoType.DEPOSIT.toString() && (
           <Button variant="destructive" disabled={loading || lock[activeWallet!.id]} onClick={onWithdrawClick}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Withdraw
           </Button>
         )}
-        {searchParams.get("type") === DaoType.WITHDRAW.toString() && (
+        {searchParams.get("type") === ckb.DaoType.WITHDRAW.toString() && (
           <Button disabled={loading || lock[activeWallet!.id]} onClick={onUnlockClick}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Unlock

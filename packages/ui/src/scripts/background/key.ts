@@ -1,5 +1,5 @@
 import { AddressType } from "@ckb-lumos/hd";
-import { createPrivateKey, derivePrivateKey, getPrivateKey } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { createStore, get, set } from "idb-keyval";
 import { v4 as uuid } from "uuid";
 
@@ -16,7 +16,10 @@ export const creatKeyService = (privateKeyCache: PrivateKeyCache) => {
         const id = uuid();
         const { mnemonic, password } = params;
 
-        const { extendedPrivateKey, json, serializedAccountExtendedPublicKey } = createPrivateKey(mnemonic, password);
+        const { extendedPrivateKey, json, serializedAccountExtendedPublicKey } = ckb.createPrivateKey(
+          mnemonic,
+          password,
+        );
 
         privateKeyCache.saveKey(id, extendedPrivateKey);
         await set(id, json, ckbKeystoreStore);
@@ -29,7 +32,7 @@ export const creatKeyService = (privateKeyCache: PrivateKeyCache) => {
         const json = await get(id, ckbKeystoreStore);
         if (!json) throw new Error("Keystore not found");
 
-        const { extendedPrivateKey } = getPrivateKey(json, password);
+        const { extendedPrivateKey } = ckb.getPrivateKey(json, password);
 
         privateKeyCache.saveKey(id, extendedPrivateKey);
       },
@@ -43,7 +46,7 @@ export const creatKeyService = (privateKeyCache: PrivateKeyCache) => {
         const extendedPrivateKey = privateKeyCache.getKey(id);
         if (!extendedPrivateKey) throw new Error("PrivateKey not found");
 
-        return derivePrivateKey(extendedPrivateKey, addressType, index);
+        return ckb.derivePrivateKey(extendedPrivateKey, addressType, index);
       },
     },
   });

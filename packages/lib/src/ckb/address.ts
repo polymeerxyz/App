@@ -4,11 +4,11 @@ import { encodeToAddress, generateAddress } from "@ckb-lumos/helpers";
 
 export const publicKeyToAddress = (
   accountExtendedPublicKey: AccountExtendedPublicKey,
-  addressType: AddressType,
+  type: AddressType,
   index: number,
   config: Config,
 ) => {
-  const pubkey = accountExtendedPublicKey.publicKeyInfo(addressType, index).blake160;
+  const pubkey = accountExtendedPublicKey.publicKeyInfo(type, index).blake160;
   const lockScript = {
     codeHash: config.SCRIPTS.SECP256K1_BLAKE160!.CODE_HASH,
     hashType: config.SCRIPTS.SECP256K1_BLAKE160!.HASH_TYPE,
@@ -19,11 +19,11 @@ export const publicKeyToAddress = (
 
 export const publicKeyToLegacyAddress = (
   accountExtendedPublicKey: AccountExtendedPublicKey,
-  addressType: AddressType,
+  type: AddressType,
   index: number,
   config: Config,
 ) => {
-  const pubkey = accountExtendedPublicKey.publicKeyInfo(addressType, index).blake160;
+  const pubkey = accountExtendedPublicKey.publicKeyInfo(type, index).blake160;
   const lockScript = {
     codeHash: config.SCRIPTS.SECP256K1_BLAKE160!.CODE_HASH,
     hashType: config.SCRIPTS.SECP256K1_BLAKE160!.HASH_TYPE,

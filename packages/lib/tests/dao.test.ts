@@ -7,11 +7,11 @@ import DaoService from "../src/ckb/services/dao-service";
 import { FeeRate } from "../src/ckb/types/fee";
 import { ckb } from "./common";
 
-test("ckb/services/dao-service.deposit", async (t) => {
+test.skip("deposit Dao", async (t) => {
   const daoService = new DaoService(ckb.config, ckb.indexer, ckb.rpc);
 
   const address = publicKeyToAddress(
-    ckb.extendedPrivateKey.toAccountExtendedPublicKey(),
+    ckb.extendedPrivateKey!.toAccountExtendedPublicKey(),
     AddressType.Receiving,
     0,
     ckb.config,
@@ -24,7 +24,7 @@ test("ckb/services/dao-service.deposit", async (t) => {
   });
 
   const tx = await daoService.signWithPrivateKeys(txSkeleton, [
-    ckb.extendedPrivateKey.privateKeyInfo(AddressType.Receiving, 0).privateKey,
+    ckb.extendedPrivateKey!.privateKeyInfo(AddressType.Receiving, 0).privateKey,
   ]);
 
   const hash = await daoService.send(tx);

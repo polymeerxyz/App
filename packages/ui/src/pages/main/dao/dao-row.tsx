@@ -1,4 +1,4 @@
-import { Dao, DaoType } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { format } from "date-fns";
 import { ChevronRight } from "lucide-react";
 import { MouseEvent } from "react";
@@ -10,15 +10,15 @@ import { cn } from "@/lib/utils";
 import { toReadableAmount } from "@/lib/utils/amount";
 
 interface Props {
-  dao: Dao;
+  dao: ckb.Dao;
 }
 
-const getLabel = (type: DaoType) => {
+const getLabel = (type: ckb.DaoType) => {
   switch (type) {
-    case DaoType.DEPOSIT: {
+    case ckb.DaoType.DEPOSIT: {
       return "Locking";
     }
-    case DaoType.WITHDRAW: {
+    case ckb.DaoType.WITHDRAW: {
       return "Unlocking";
     }
   }
@@ -49,7 +49,7 @@ export function DaoRow({ dao }: Props) {
         <p
           className={cn(
             "text-xs text-muted-foreground",
-            dao.type === DaoType.DEPOSIT ? "text-green-500" : "text-red-500",
+            dao.type === ckb.DaoType.DEPOSIT ? "text-green-500" : "text-red-500",
           )}
         >
           {`${toReadableAmount(dao.amount)} CKB`}

@@ -1,4 +1,4 @@
-import { Transaction, TransactionType } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
@@ -7,25 +7,25 @@ import { useGetExplorerLink } from "@/hooks/useGetExplorerLink";
 import { toReadableAmount } from "@/lib/utils/amount";
 
 interface Props {
-  transaction: Transaction;
+  transaction: ckb.Transaction;
   symbol: string;
 }
 
-const getLabel = (type: TransactionType) => {
+const getLabel = (type: ckb.TransactionType) => {
   switch (type) {
-    case TransactionType.SEND_NATIVE_TOKEN: {
+    case ckb.TransactionType.SEND_NATIVE_TOKEN: {
       return "Send";
     }
-    case TransactionType.SEND_TOKEN: {
+    case ckb.TransactionType.SEND_TOKEN: {
       return "Send";
     }
-    case TransactionType.RECEIVE_NATIVE_TOKEN: {
+    case ckb.TransactionType.RECEIVE_NATIVE_TOKEN: {
       return "Receive";
     }
-    case TransactionType.RECEIVE_TOKEN: {
+    case ckb.TransactionType.RECEIVE_TOKEN: {
       return "Receive";
     }
-    case TransactionType.DEPOSIT_DAO: {
+    case ckb.TransactionType.DEPOSIT_DAO: {
       return "Deposit";
     }
   }
@@ -33,7 +33,8 @@ const getLabel = (type: TransactionType) => {
 
 export function TransactonRow({ transaction, symbol }: Props) {
   const isPositive =
-    transaction.type === TransactionType.RECEIVE_NATIVE_TOKEN || transaction.type === TransactionType.RECEIVE_TOKEN;
+    transaction.type === ckb.TransactionType.RECEIVE_NATIVE_TOKEN ||
+    transaction.type === ckb.TransactionType.RECEIVE_TOKEN;
 
   const explorerLink = useGetExplorerLink(transaction.hash, "transaction");
 

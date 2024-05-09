@@ -1,4 +1,4 @@
-import { Transaction } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { useCallback, useMemo, useState } from "react";
 
 import { useActiveAddress } from "@/hooks/useActiveAddress";
@@ -6,7 +6,7 @@ import { useTransactionService } from "@/hooks/useLib";
 import { SupportedToken } from "@/lib/models/token";
 
 export const useTransactionList = () => {
-  const [result, setResult] = useState<Transaction[]>([]);
+  const [result, setResult] = useState<ckb.Transaction[]>([]);
   const { full: activeAddress } = useActiveAddress();
   const transactionService = useTransactionService();
 

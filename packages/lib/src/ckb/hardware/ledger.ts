@@ -22,38 +22,38 @@ import { LedgerCKB } from "@polymeerxyz/hardware";
 // } from "rxjs";
 
 export default class LedgerDevice {
-  protected defaultPath = AccountExtendedPublicKey.ckbAccountPath;
+  #defaultPath = AccountExtendedPublicKey.ckbAccountPath;
 
-  private _ledgerCKB: LedgerCKB = null;
-  private _transport: Transport = null;
+  #ledgerCKB: LedgerCKB = null;
+  #transport: Transport = null;
 
-  private _mainnet: boolean;
-  private _rpc: CKBRPC;
+  #mainnet: boolean;
+  #rpc: CKBRPC;
 
-  private _connected = false;
+  #connected = false;
 
   constructor(mainnet: boolean, rpcUrl: string) {
-    this._mainnet = mainnet;
-    this._rpc = new CKBRPC(rpcUrl);
+    this.#mainnet = mainnet;
+    this.#rpc = new CKBRPC(rpcUrl);
   }
 
   get connected() {
-    return this._connected;
+    return this.#connected;
   }
 
   public async connect(transport: Transport) {
-    if (this._connected) return;
+    if (this.#connected) return;
 
-    this._transport = transport;
-    this._connected = true;
-    this._ledgerCKB = new LedgerCKB(this._transport);
+    this.#transport = transport;
+    this.#connected = true;
+    this.#ledgerCKB = new LedgerCKB(this.#transport);
   }
 
   public async disconnect() {
-    if (!this._connected) return;
+    if (!this.#connected) return;
 
-    this._transport?.close();
-    this._connected = false;
+    this.#transport?.close();
+    this.#connected = false;
   }
 
   public async signTransaction(
@@ -62,16 +62,16 @@ export default class LedgerDevice {
     context?: RPC.RawTransaction[],
   ) {
     const tx = createTransactionFromSkeleton(txSkeleton);
-    const rawTx = this._rpc.paramsFormatter.toRawTransaction(tx);
+    const rawTx = this.#rpc.paramsFormatter.toRawTransaction(tx);
 
     if (!context) {
       const txs = await Promise.all(
         rawTx.inputs.map((i) =>
-          this._rpc.getTransaction(i.previous_output!.tx_hash),
+          this.#rpc.getTransaction(i.previous_output!.tx_hash),
         ),
       );
       context = txs.map((i) =>
-        this._rpc.paramsFormatter.toRawTransaction(i.transaction),
+        this.#rpc.paramsFormatter.toRawTransaction(i.transaction),
       );
     }
 
@@ -79,7 +79,7 @@ export default class LedgerDevice {
      * Use derived path since public key is a derived one
      * path === AccountExtendedPublicKey.pathForReceiving(0) ? this.defaultPath : path
      */
-    const signature = await this._ledgerCKB!.signTransaction(
+    const signature = await this.#ledgerCKB!.signTransaction(
       path,
       rawTx,
       tx.witnesses,
@@ -97,12 +97,12 @@ export default class LedgerDevice {
      * Use derived path since public key is a derived one
      * path === AccountExtendedPublicKey.pathForReceiving(0) ? this.defaultPath : path
      */
-    const signed = await this._ledgerCKB!.signMessage(path, message, false);
+    const signed = await this.#ledgerCKB!.signMessage(path, message, false);
     return this.addPrefix(signed);
   }
 
   async getAppVersion(): Promise<string> {
-    const conf = await this._ledgerCKB?.getAppConfiguration();
+    const conf = await this.#ledgerCKB?.getAppConfiguration();
     return conf!.version;
   }
 
@@ -110,13 +110,13 @@ export default class LedgerDevice {
     publicKey: string;
     chainCode: string;
   }> {
-    return await this._ledgerCKB!.getWalletExtendedPublicKey(this.defaultPath);
+    return await this.#ledgerCKB!.getWalletExtendedPublicKey(this.#defaultPath);
   }
 
   async getPublicKey() {
-    return this._ledgerCKB!.getWalletPublicKey(
-      this.defaultPath,
-      !this._mainnet,
+    return this.#ledgerCKB!.getWalletPublicKey(
+      this.#defaultPath,
+      !this.#mainnet,
     );
   }
 

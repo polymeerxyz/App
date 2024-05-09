@@ -1,5 +1,5 @@
 import { parseUnit } from "@ckb-lumos/bi";
-import { FeeRate } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { useCallback, useRef } from "react";
 
 import { useActiveAddress } from "@/hooks/useActiveAddress";
@@ -11,7 +11,7 @@ export const useLedgerDaoDeposit = () => {
   const daoService = useDaoService();
 
   return useCallback(
-    async ({ amount }: { amount: string }, feeRate = FeeRate.NORMAL) => {
+    async ({ amount }: { amount: string }, feeRate = ckb.FeeRate.NORMAL) => {
       const ledgerDevice = await getLedgerDevice();
 
       const txSkeleton = await daoService.current.deposit({

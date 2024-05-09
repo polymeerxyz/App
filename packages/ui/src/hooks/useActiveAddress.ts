@@ -1,5 +1,5 @@
 import { AccountExtendedPublicKey } from "@ckb-lumos/hd";
-import { publicKeyToAddress, publicKeyToLegacyAddress } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { useMemo } from "react";
 
 import { useAppContext } from "@/routes/hook";
@@ -17,8 +17,8 @@ export const useActiveAddress = () => {
     const accountExtendedPublicKey = AccountExtendedPublicKey.parse(activeWallet!.serializedAccountExtendedPublicKey);
     return {
       id: activeWallet!.id,
-      full: publicKeyToAddress(accountExtendedPublicKey, addressType, index, config),
-      legacy: publicKeyToLegacyAddress(accountExtendedPublicKey, addressType, index, config),
+      full: ckb.publicKeyToAddress(accountExtendedPublicKey, addressType, index, config),
+      legacy: ckb.publicKeyToLegacyAddress(accountExtendedPublicKey, addressType, index, config),
       path: AccountExtendedPublicKey.pathFor(addressType, index),
     };
   }, [activeWallet, addressType, config, index]);

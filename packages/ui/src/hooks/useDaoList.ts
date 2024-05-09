@@ -1,11 +1,11 @@
-import { Dao } from "@polymeerxyz/lib";
+import { ckb } from "@polymeerxyz/lib";
 import { useCallback, useMemo, useState } from "react";
 
 import { useActiveAddress } from "@/hooks/useActiveAddress";
 import { useDaoService } from "@/hooks/useLib";
 
 export const useDaoList = () => {
-  const [result, setResult] = useState<Dao[]>([]);
+  const [result, setResult] = useState<ckb.Dao[]>([]);
   const { full: activeAddress } = useActiveAddress();
   const daoService = useDaoService();
 

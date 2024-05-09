@@ -5,7 +5,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "rollup --config rollup.config.ts --configPlugin typescript",
-    "test": "ava tests/address.test.ts --timeout=2m"
+    "test": "ava"
   },
   "dependencies": {
     "@ckb-lumos/base": "0.22.2",
@@ -49,8 +49,12 @@
     "extensions": [
       "ts"
     ],
+    "files": [
+      "tests/*.test.ts"
+    ],
     "require": [
       "ts-node/register"
-    ]
+    ],
+    "timeout": "2m"
   }
 }
