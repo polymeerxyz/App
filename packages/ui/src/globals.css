@@ -59,7 +59,7 @@
   }
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 6px;
 }
 
@@ -74,4 +74,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-} */
+}

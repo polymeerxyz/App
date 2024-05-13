@@ -1,3 +1,4 @@
+import { ArrowDown } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,15 +25,15 @@ export default function DaoPage() {
           <p className="text-sm font-semibold">+0.00%</p>
         </div>
       </div>
-      <Separator className="mx-auto w-3/5" />
+      <Button className="w-full" onClick={() => navigate("deposit?withBack=true")}>
+        <ArrowDown className="mr-2 h-6 w-6" />
+        Deposit
+      </Button>
       <div className="flex flex-col space-y-2">
         {daos.map((dao, index) => (
           <DaoRow key={dao.hash} dao={dao} />
         ))}
       </div>
-      <Button className="w-full" onClick={() => navigate("deposit?withBack=true")}>
-        Deposit
-      </Button>
     </div>
   );
 }

@@ -14,7 +14,13 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function BottomTabNavigator({ className, activeIndex, tabsConfig }: Props) {
   return (
-    <div className={cn("grid h-14 min-h-14 w-full border-t", `grid-cols-${tabsConfig.length}`, className)}>
+    <div
+      className={cn(
+        "fixed bottom-0 grid h-14 w-full max-w-[800px] border-t bg-card",
+        `grid-cols-${tabsConfig.length}`,
+        className,
+      )}
+    >
       {tabsConfig.map(({ key, Icon }, index) => (
         <Button key={key} variant="ghost" size="icon" className="self-center justify-self-center" asChild>
           <Link to={`${key}`}>

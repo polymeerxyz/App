@@ -1,11 +1,10 @@
 import { Blocks, Settings, WalletMinimal } from "lucide-react";
 import { useMemo } from "react";
 import { matchPath, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useWindowSize } from "react-use";
 
 import BottomTabNavigator from "@/components/navigator/bottom-tab";
 import TopHeader from "@/components/navigator/top-header";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { useIsPopup } from "@/hooks/useIsPopup";
 import { cn } from "@/lib/utils";
 
 function useTabIndex(routes: string[]) {
@@ -31,18 +30,21 @@ const tabsConfig = [
 export default function PopupLayout() {
   const routes = useMemo(() => tabsConfig.map((tab) => tab.key), []);
   const tabIndex = useTabIndex(routes);
-
-  const { width, height } = useWindowSize();
-  const isPopup = width === 400 && height === 600;
+  const isPopup = useIsPopup();
 
   return (
     <div className="flex h-screen min-h-[600px] min-w-[400px] flex-col items-center justify-center bg-background">
-      <div className={cn("flex h-full max-h-[960px] w-full max-w-[800px] flex-col bg-card", isPopup ? "" : "border")}>
-        <TopHeader />
-        <ScrollArea className={cn("w-full", `h-[${Math.max(Math.min(960, height) - 64 - 56, 478)}px]`)}>
+      <div
+        className={cn(
+          "flex h-full max-h-[960px] w-full max-w-[800px] flex-col overflow-y-scroll bg-card",
+          isPopup ? "" : "border",
+        )}
+      >
+        <div className="h-fit pb-14 pt-16">
           <Outlet />
-        </ScrollArea>
-        <BottomTabNavigator className="mt-auto" activeIndex={tabIndex} tabsConfig={tabsConfig} />
+        </div>
+        <TopHeader />
+        <BottomTabNavigator activeIndex={tabIndex} tabsConfig={tabsConfig} />
       </div>
     </div>
   );

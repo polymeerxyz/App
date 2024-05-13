@@ -39,7 +39,7 @@ export function TransactonRow({ transaction, symbol }: Props) {
   const explorerLink = useGetExplorerLink(transaction.hash, "transaction");
 
   return (
-    <Button className="flex h-14 w-full items-center" variant="ghost" asChild>
+    <Button className="flex h-14 w-full items-center rounded-md px-4" variant="ghost" asChild>
       <Link to={explorerLink} target="_blank">
         <label className="flex flex-col space-y-1 text-start text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
           <span>{getLabel(transaction.type)}</span>

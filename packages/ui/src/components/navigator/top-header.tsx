@@ -9,7 +9,7 @@ import { useWalletStore } from "@/stores/wallet";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
-export default function TopHeader(props: Props) {
+export default function TopHeader({ className }: Props) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const lock = useLockStore((s) => s.lock);
@@ -22,7 +22,10 @@ export default function TopHeader(props: Props) {
 
   return (
     <div
-      className={cn("relative flex h-16 min-h-16 w-full items-center justify-between border-b px-4", props.className)}
+      className={cn(
+        "fixed top-0 flex h-16 w-full max-w-[800px] items-center justify-between border-b bg-card px-4",
+        className,
+      )}
     >
       <div className="absolute bottom-0 left-20 right-20 top-0 flex flex-col items-center justify-center">
         <Button variant="outline" className="rounded-full" onClick={() => navigate("/main/wallets?withBack=true")}>

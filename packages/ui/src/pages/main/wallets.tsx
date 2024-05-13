@@ -11,14 +11,14 @@ export default function WalletsPage() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col">
-      <div className="flex items-center justify-between p-4">
+    <div className="flex flex-col space-y-4 p-4">
+      <div className="flex items-center justify-between">
         <p className="text-lg font-medium">{`Total: ${wallets.length} wallet(s)`}</p>
         <Button className="self-end rounded-full" variant="outline" onClick={onClick}>
           Add wallet
         </Button>
       </div>
-      <div className="flex flex-col space-y-2 p-4">
+      <div className="flex flex-col space-y-2">
         {wallets.map((el) => {
           return <WalletRow key={el.id} wallet={el} isActive={activeWalletId === el.id} />;
         })}

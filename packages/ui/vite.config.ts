@@ -30,6 +30,12 @@ export default defineConfig({
           default_popup: "index.html",
           default_title: "Polymeer",
         },
+        icons: {
+          "16": process.env.NODE_ENV === "production" ? "icon16.png" : "dev_icon16.png",
+          "32": process.env.NODE_ENV === "production" ? "icon32.png" : "dev_icon32.png",
+          "48": process.env.NODE_ENV === "production" ? "icon48.png" : "dev_icon48.png",
+          "128": process.env.NODE_ENV === "production" ? "icon128.png" : "dev_icon128.png",
+        },
       },
     }),
     nodePolyfills({
