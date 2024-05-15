@@ -58,12 +58,12 @@ export default function NetworkDialog() {
         />
       </DialogTrigger>
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{t("dialog.wallet_network")}</DialogTitle>
+          <DialogDescription>{t("dialog.choose_another_rpc_provider")}</DialogDescription>
+        </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col space-y-4">
-            <DialogHeader>
-              <DialogTitle>{t("dialog.wallet_network")}</DialogTitle>
-              <DialogDescription>{t("dialog.choose_another_rpc_provider")}</DialogDescription>
-            </DialogHeader>
             <FormField
               control={form.control}
               name="type"

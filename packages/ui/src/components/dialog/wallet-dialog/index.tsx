@@ -42,8 +42,8 @@ export default function WalletDialog() {
       </DialogTrigger>
       <DialogContent className="flex w-full flex-col space-y-4">
         <DialogHeader>
-          <DialogTitle>{t("dialog.wallet_language")}</DialogTitle>
-          <DialogDescription>{`Total: ${wallets.length} wallet(s)`}</DialogDescription>
+          <DialogTitle>{t("dialog.choose_wallet")}</DialogTitle>
+          <DialogDescription>{t("dialog.total_wallet", { count: wallets.length })}</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col space-y-2">
           {wallets.map((el) => (
@@ -52,7 +52,7 @@ export default function WalletDialog() {
         </div>
         <DialogFooter>
           <Button className="w-full" variant="outline" onClick={onAddClick}>
-            Add wallet
+            {t("dialog.add_wallet")}
           </Button>
         </DialogFooter>
       </DialogContent>

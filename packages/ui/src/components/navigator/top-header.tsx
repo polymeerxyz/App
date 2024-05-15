@@ -1,11 +1,11 @@
-import { ChevronLeft, Lock, Stars, Unlock } from "lucide-react";
+import { ChevronLeft, Stars } from "lucide-react";
 import { useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import LockDialog from "@/components/dialog/lock-dialog";
 import WalletDialog from "@/components/dialog/wallet-dialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useLockStore } from "@/stores/lock";
 import { useWalletStore } from "@/stores/wallet";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
@@ -13,7 +13,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 export default function TopHeader({ className }: Props) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const lock = useLockStore((s) => s.lock);
   const activeWallet = useWalletStore((s) => s.getActiveWallet("nervosnetwork"));
 
   const isLocal = useMemo(
@@ -39,14 +38,7 @@ export default function TopHeader({ className }: Props) {
         <div />
       )}
       {isLocal ? (
-        <Button
-          variant="ghost"
-          size="icon"
-          className={cn(lock[activeWallet!.id] ? "" : "pointer-events-none")}
-          onClick={() => isLocal && navigate("/lock")}
-        >
-          {lock[activeWallet!.id] ? <Lock /> : <Unlock />}
-        </Button>
+        <LockDialog />
       ) : (
         <Button variant="ghost" size="icon" className="pointer-events-none">
           <Stars />

@@ -50,12 +50,12 @@ export default function LanguageDialog() {
         />
       </DialogTrigger>
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{t("dialog.wallet_language")}</DialogTitle>
+          <DialogDescription>{t("dialog.choose_another_language")}</DialogDescription>
+        </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col space-y-4">
-            <DialogHeader>
-              <DialogTitle>{t("dialog.wallet_language")}</DialogTitle>
-              <DialogDescription>{t("dialog.choose_another_language")}</DialogDescription>
-            </DialogHeader>
             <FormField
               control={form.control}
               name="language"

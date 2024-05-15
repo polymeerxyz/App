@@ -19,7 +19,15 @@
     "choose_another_language": "Choose another language",
     "language": "Language",
     "select_language_to_display": "Select language to display",
-    "change": "Change"
+    "change": "Change",
+    "choose_wallet": "Choose wallet",
+    "total_wallet_one": "Total: {{count}} wallet",
+    "total_wallet_other": "Total: {{count}} wallets",
+    "add_wallet": "Add wallet",
+    "unlock_current_wallet": "Unlock current wallet",
+    "enter_password_to_unlock": "Enter your password to unlock <1>{{name}}<1>",
+    "password": "Password",
+    "confirm": "Confirm"
   },
   "version_note": "Version: {{version}} - {{env}}"
 }

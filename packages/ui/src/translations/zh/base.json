@@ -19,7 +19,15 @@
     "choose_another_language": "选择另一种语言",
     "language": "语言",
     "select_language_to_display": "选择要显示的语言",
-    "change": "更改"
+    "change": "更改",
+    "choose_wallet": "选择钱包",
+    "total_wallet_one": "总计：{{count}}个钱包",
+    "total_wallet_other": "总计：{{count}}个钱包",
+    "add_wallet": "添加钱包",
+    "unlock_current_wallet": "解锁当前钱包",
+    "enter_password_to_unlock": "输入密码以解锁<1>{{name}}</1>",
+    "password": "密码",
+    "confirm": "确认"
   },
   "version_note": "版本：{{version}} - {{env}}"
 }

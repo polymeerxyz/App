@@ -11,7 +11,7 @@
   },
   "dialog": {
     "wallet_network": "Mạng ví",
-    "choose_another_rpc_provider": "Chọn một nhà cung cấp RPC khác",
+    "choose_another_rpc_provider": "Chọn nhà cung cấp RPC khác",
     "select_network_type": "Chọn loại mạng",
     "type": "Loại",
     "provider_url": "URL nhà cung cấp",
@@ -19,7 +19,15 @@
     "choose_another_language": "Chọn một ngôn ngữ khác",
     "language": "Ngôn ngữ",
     "select_language_to_display": "Chọn ngôn ngữ để hiển thị",
-    "change": "Thay đổi"
+    "change": "Thay đổi",
+    "choose_wallet": "Chọn ví",
+    "total_wallet_one": "Tổng cộng: {{count}} ví",
+    "total_wallet_other": "Tổng cộng: {{count}} ví",
+    "add_wallet": "Thêm ví",
+    "unlock_current_wallet": "Mở khóa ví hiện tại",
+    "enter_password_to_unlock": "Nhập mật khẩu để mở khóa <1>{{name}}<1>",
+    "password": "Mật khẩu",
+    "confirm": "Xác nhận"
   },
   "version_note": "Phiên bản: {{version}} - {{env}}"
 }
