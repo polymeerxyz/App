@@ -23,7 +23,7 @@ export default function BottomTabNavigator({ className, activeIndex, tabsConfig 
     >
       {tabsConfig.map(({ key, Icon }, index) => (
         <Button key={key} variant="ghost" size="icon" className="self-center justify-self-center" asChild>
-          <Link to={`${key}`}>
+          <Link to={`${key.replace("/*", "")}`}>
             <Icon className={cn(activeIndex === index ? "stroke-primary" : "stroke-muted-foreground")} />
           </Link>
         </Button>

@@ -12,7 +12,6 @@ import SettingsPage from "@/pages/main/settings";
 import ReceivePage from "@/pages/main/token/receive";
 import SendPage from "@/pages/main/token/send";
 import TokenPage from "@/pages/main/token/token";
-import WalletsPage from "@/pages/main/wallets";
 import AddSeedPhrasePage from "@/pages/register/add-seedphrase";
 import CompleteOnboardingPage from "@/pages/register/complete-onboarding";
 import ConnectHardwareWalletPage from "@/pages/register/connect-hardware-wallet";
@@ -80,11 +79,10 @@ export function MainRoute() {
             <Route path=":id" element={<TokenPage />} />
             <Route path=":id/receive" element={<ReceivePage />} />
             <Route path=":id/send" element={<SendPage />} />
+            <Route index element={<HomePage />} />
           </Route>
-          <Route path="wallets" element={<WalletsPage />} />
-          <Route index element={<HomePage />} />
         </Route>
-        <Route path="*" element={<Navigate to="/main" />} />
+        <Route path="*" element={<Navigate to="/main/token" />} />
       </Routes>
     </AppContextProvider>
   );

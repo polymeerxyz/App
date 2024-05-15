@@ -17,85 +17,66 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useNetworkStore } from "@/stores/network";
+import { supportedLanguages } from "@/translations/i18n";
 
 const FormSchema = z.object({
-  url: z.string(),
-  type: z.enum(["mainnet", "testnet"]),
+  language: z.string(),
 });
 
-export default function NetworkDialog() {
-  const { t } = useTranslation();
-  const { rpcUrl, type } = useNetworkStore((s) => s.config.nervosnetwork);
-  const setNetworkInfo = useNetworkStore((s) => s.setNetworkInfo);
+export default function LanguageDialog() {
+  const { i18n, t } = useTranslation();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      url: rpcUrl,
-      type,
+      language: i18n.language,
     },
   });
 
   const onSubmit = useCallback(
     async (data: z.infer<typeof FormSchema>) => {
-      setNetworkInfo("nervosnetwork", {
-        rpcUrl: data.url,
-        type: data.type,
-      });
+      i18n.changeLanguage(data.language);
     },
-    [setNetworkInfo],
+    [i18n],
   );
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <MenuButton
-          label={t("settings.networks")}
-          sublabel={`(${type === "mainnet" ? "Mainnet" : "Testnet"})`}
-          description={t("settings.configure_wallet_network")}
+          label={t("settings.languages")}
+          sublabel={`(${i18n.language.toUpperCase()})`}
+          description={t("settings.choose_another_display_language")}
         />
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col space-y-4">
             <DialogHeader>
-              <DialogTitle>{t("dialog.wallet_network")}</DialogTitle>
-              <DialogDescription>{t("dialog.choose_another_rpc_provider")}</DialogDescription>
+              <DialogTitle>{t("dialog.wallet_language")}</DialogTitle>
+              <DialogDescription>{t("dialog.choose_another_language")}</DialogDescription>
             </DialogHeader>
             <FormField
               control={form.control}
-              name="type"
+              name="language"
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>{t("dialog.type")}</FormLabel>
+                    <FormLabel>{t("dialog.language")}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("dialog.select_network_type")} />
+                          <SelectValue placeholder={t("dialog.select_language_to_display")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="mainnet">Mainnet</SelectItem>
-                        <SelectItem value="testnet">Testnet</SelectItem>
+                        {supportedLanguages.map((lang) => (
+                          <SelectItem key={lang} value={lang}>
+                            {lang.toUpperCase()}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
-                  </FormItem>
-                );
-              }}
-            />
-            <FormField
-              control={form.control}
-              name={"url"}
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormLabel>{t("dialog.provider_url")}</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
                   </FormItem>
                 );
               }}

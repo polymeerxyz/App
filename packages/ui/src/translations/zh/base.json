@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "expand_view": "展开视图",
+    "open_extension_in_a_new_tab": "在新标签页中打开扩展",
+    "languages": "语言",
+    "choose_another_display_language": "选择另一种显示语言",
+    "themes": "主题",
+    "change_display_mode": "更改显示模式",
+    "networks": "网络",
+    "configure_wallet_network": "配置钱包网络"
+  },
+  "dialog": {
+    "wallet_network": "钱包网络",
+    "choose_another_rpc_provider": "选择另一个RPC提供者",
+    "select_network_type": "选择网络类型",
+    "type": "类型",
+    "provider_url": "提供者URL",
+    "wallet_language": "钱包语言",
+    "choose_another_language": "选择另一种语言",
+    "language": "语言",
+    "select_language_to_display": "选择要显示的语言",
+    "change": "更改"
+  },
+  "version_note": "版本：{{version}} - {{env}}"
+}

@@ -2,6 +2,7 @@ import { ChevronLeft, Lock, Stars, Unlock } from "lucide-react";
 import { useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import WalletDialog from "@/components/dialog/wallet-dialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLockStore } from "@/stores/lock";
@@ -28,9 +29,7 @@ export default function TopHeader({ className }: Props) {
       )}
     >
       <div className="absolute bottom-0 left-20 right-20 top-0 flex flex-col items-center justify-center">
-        <Button variant="outline" className="rounded-full" onClick={() => navigate("/main/wallets?withBack=true")}>
-          {activeWallet!.name}
-        </Button>
+        <WalletDialog />
       </div>
       {searchParams.get("withBack") === "true" ? (
         <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>

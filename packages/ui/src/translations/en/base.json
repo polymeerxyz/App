@@ -1,1 +1,25 @@
-{}
+{
+  "settings": {
+    "expand_view": "Expand view",
+    "open_extension_in_a_new_tab": "Open extension in a new tab",
+    "languages": "Languages",
+    "choose_another_display_language": "Choose another display language",
+    "themes": "Themes",
+    "change_display_mode": "Change display mode",
+    "networks": "Networks",
+    "configure_wallet_network": "Configure wallet network"
+  },
+  "dialog": {
+    "wallet_network": "Wallet network",
+    "choose_another_rpc_provider": "Choose another RPC provider",
+    "select_network_type": "Select network type",
+    "type": "Type",
+    "provider_url": "Provider URL",
+    "wallet_language": "Wallet language",
+    "choose_another_language": "Choose another language",
+    "language": "Language",
+    "select_language_to_display": "Select language to display",
+    "change": "Change"
+  },
+  "version_note": "Version: {{version}} - {{env}}"
+}

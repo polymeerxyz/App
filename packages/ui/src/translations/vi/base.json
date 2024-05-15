@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "expand_view": "Mở rộng giao diện",
+    "open_extension_in_a_new_tab": "Mở tiện ích mở rộng trên tab mới",
+    "languages": "Ngôn ngữ",
+    "choose_another_display_language": "Chọn một ngôn ngữ hiển thị khác",
+    "themes": "Chủ đề",
+    "change_display_mode": "Thay đổi chế độ hiển thị",
+    "networks": "Mạng",
+    "configure_wallet_network": "Cấu hình mạng ví"
+  },
+  "dialog": {
+    "wallet_network": "Mạng ví",
+    "choose_another_rpc_provider": "Chọn một nhà cung cấp RPC khác",
+    "select_network_type": "Chọn loại mạng",
+    "type": "Loại",
+    "provider_url": "URL nhà cung cấp",
+    "wallet_language": "Ngôn ngữ ví",
+    "choose_another_language": "Chọn một ngôn ngữ khác",
+    "language": "Ngôn ngữ",
+    "select_language_to_display": "Chọn ngôn ngữ để hiển thị",
+    "change": "Thay đổi"
+  },
+  "version_note": "Phiên bản: {{version}} - {{env}}"
+}

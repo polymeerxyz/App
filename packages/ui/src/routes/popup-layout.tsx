@@ -14,11 +14,11 @@ function useTabIndex(routes: string[]) {
 
 const tabsConfig = [
   {
-    key: "/main",
+    key: "/main/token/*",
     Icon: WalletMinimal,
   },
   {
-    key: "/main/dao",
+    key: "/main/dao/*",
     Icon: Blocks,
   },
   {

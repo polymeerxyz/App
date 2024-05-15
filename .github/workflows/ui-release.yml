@@ -47,3 +47,4 @@ jobs:
           files: |
             polymeerxyz.zip
             Release.txt
+          generate_release_notes: false
