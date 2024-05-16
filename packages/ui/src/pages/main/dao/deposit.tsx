@@ -1,31 +1,40 @@
+import { formatUnit } from "@ckb-lumos/bi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ckb } from "@polymeerxyz/lib";
 import { Loader2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useActiveAddress } from "@/hooks/useActiveAddress";
 import { useLedgerDaoDeposit } from "@/hooks/useLedgerDaoDeposit";
 import { useLocalDaoDeposit } from "@/hooks/useLocalDaoDeposit";
 import { useTokenInfo } from "@/hooks/useTokenInfo";
-import { toReadableAmount } from "@/lib/utils/amount";
 import { useLockStore } from "@/stores/lock";
 import { useWalletStore } from "@/stores/wallet";
 
 const FormSchema = z.object({
+  address: z.string(),
   amount: z.string(),
 });
 
 export default function DepositPage() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const activeAddress = useActiveAddress();
   const lock = useLockStore((s) => s.lock);
   const activeWallet = useWalletStore((s) => s.getActiveWallet("nervosnetwork"));
-  const { balance, token } = useTokenInfo("ckb");
+  const { balance, fetch: fetchInfo } = useTokenInfo("ckb");
   const ledgerDaoDeposit = useLedgerDaoDeposit();
   const localDaoDeposit = useLocalDaoDeposit();
+
+  useEffect(() => {
+    fetchInfo();
+  }, [fetchInfo]);
 
   const isLocal = useMemo(
     () => activeWallet!.type === "private-key" || activeWallet!.type === "mnemonic",
@@ -35,6 +44,7 @@ export default function DepositPage() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
+      address: activeAddress.full,
       amount: "",
     },
   });
@@ -57,6 +67,7 @@ export default function DepositPage() {
           ckb.FeeRate.NORMAL,
         );
       }
+      navigate(-1);
     } catch (error) {
       console.error(error);
     } finally {
@@ -69,6 +80,20 @@ export default function DepositPage() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col space-y-4">
           <div className="space-y-4">
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Input disabled {...field} />
+                    </FormControl>
+                  </FormItem>
+                );
+              }}
+            />
             <FormField
               control={form.control}
               name="amount"
@@ -86,10 +111,10 @@ export default function DepositPage() {
                         size="sm"
                         onClick={(e) => {
                           e.preventDefault();
-                          form.setValue("amount", toReadableAmount(balance.available));
+                          form.setValue("amount", formatUnit(balance.available, "ckb"));
                         }}
                       >
-                        {`Max: ${toReadableAmount(balance.available)} CKB`}
+                        {`Max: ${formatUnit(balance.available, "ckb")} CKB`}
                       </Button>
                     </div>
                   </FormItem>
@@ -99,7 +124,7 @@ export default function DepositPage() {
           </div>
           <Button className="w-full" type="submit" disabled={loading || lock[activeWallet!.id]}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Send
+            Deposit
           </Button>
         </form>
       </Form>

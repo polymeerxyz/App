@@ -10,7 +10,7 @@ export const useTokenPrice = () => {
   const [price, setPrice] = useState(0);
 
   const fetch = useCallback(async (token: SupportedToken) => {
-    if (token.address === "ckb") {
+    if (token.id === "ckb") {
       const { data } = await axios.get<{ market_data: { current_price: { [currency: string]: number } } }>(
         "https://api.coingecko.com/api/v3/coins/nervos-network",
       );

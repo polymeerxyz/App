@@ -1,6 +1,5 @@
 import { Moon, Sun } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import browser from "webextension-polyfill";
 
 import MenuButton from "@/components/button/menu-button";
@@ -10,8 +9,7 @@ import { useTheme } from "@/contexts/theme";
 import { openExtensionInBrowser } from "@/lib/utils/extension";
 
 export default function SettingsPage() {
-  const navigate = useNavigate();
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
 
   const { version } = browser.runtime.getManifest();

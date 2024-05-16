@@ -20,7 +20,7 @@ export const useLocalTransfer = () => {
       feeType: ckb.FeeType = "sender",
     ) => {
       let txSkeleton: TransactionSkeletonType;
-      if (token.address === "ckb") {
+      if (token.id === "ckb") {
         txSkeleton = await transactionService.current.transfer({
           from: activeAddress,
           to,

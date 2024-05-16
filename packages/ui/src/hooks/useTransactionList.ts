@@ -12,7 +12,7 @@ export const useTransactionList = () => {
 
   const fetch = useCallback(
     async (token: SupportedToken) => {
-      if (token.address === "ckb") {
+      if (token.id === "ckb") {
         const txs = await transactionService.current.listNativeTransaction(activeAddress);
         setResult(txs.reverse());
       } else if (token.xudtArgs) {

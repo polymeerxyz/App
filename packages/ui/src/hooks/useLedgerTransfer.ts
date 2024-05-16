@@ -21,7 +21,7 @@ export const useLedgerTransfer = () => {
       const ledgerDevice = await getLedgerDevice();
 
       let txSkeleton: TransactionSkeletonType;
-      if (token.address === "ckb") {
+      if (token.id === "ckb") {
         txSkeleton = await transactionService.current.transfer({
           from: activeAddress,
           to,

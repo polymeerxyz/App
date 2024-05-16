@@ -1,3 +1,4 @@
+import { formatUnit } from "@ckb-lumos/bi";
 import { ckb } from "@polymeerxyz/lib";
 import { format } from "date-fns";
 import { ChevronRight } from "lucide-react";
@@ -7,7 +8,6 @@ import { createSearchParams, Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useGetExplorerLink } from "@/hooks/useGetExplorerLink";
 import { cn } from "@/lib/utils";
-import { toReadableAmount } from "@/lib/utils/amount";
 
 interface Props {
   dao: ckb.Dao;
@@ -52,10 +52,17 @@ export function DaoRow({ dao }: Props) {
             dao.type === ckb.DaoType.DEPOSIT ? "text-green-500" : "text-red-500",
           )}
         >
-          {`${toReadableAmount(dao.amount)} CKB`}
+          {`${formatUnit(dao.amount, "ckb")} CKB`}
         </p>
       </div>
-      <Button variant="link" className="p-0 text-muted-foreground" asChild>
+      <Button
+        className="p-0 text-muted-foreground"
+        variant="link"
+        asChild
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <Link to={explorerLink} target="_blank" className="text-xs">
           {format(dao.timestamp, "P")}
           <ChevronRight className="ml-2 h-4 w-4" />

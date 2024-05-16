@@ -27,7 +27,10 @@
     "unlock_current_wallet": "Unlock current wallet",
     "enter_password_to_unlock": "Enter your password to unlock <1>{{name}}<1>",
     "password": "Password",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "add_token": "Add token",
+    "custom_token": "Custom token",
+    "input_xudt_args": "Input the XUDT Args"
   },
   "version_note": "Version: {{version}} - {{env}}"
 }

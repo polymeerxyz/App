@@ -27,7 +27,10 @@
     "unlock_current_wallet": "Mở khóa ví hiện tại",
     "enter_password_to_unlock": "Nhập mật khẩu để mở khóa <1>{{name}}<1>",
     "password": "Mật khẩu",
-    "confirm": "Xác nhận"
+    "confirm": "Xác nhận",
+    "add_token": "Thêm token",
+    "custom_token": "Token tùy chỉnh",
+    "input_xudt_args": "Nhập XUDT Args"
   },
   "version_note": "Phiên bản: {{version}} - {{env}}"
 }

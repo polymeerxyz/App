@@ -1,14 +1,15 @@
+import { formatUnit } from "@ckb-lumos/bi";
 import { ckb } from "@polymeerxyz/lib";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { useGetExplorerLink } from "@/hooks/useGetExplorerLink";
-import { toReadableAmount } from "@/lib/utils/amount";
+import { SupportedToken } from "@/lib/models/token";
 
 interface Props {
   transaction: ckb.Transaction;
-  symbol: string;
+  token: SupportedToken;
 }
 
 const getLabel = (type: ckb.TransactionType) => {
@@ -31,7 +32,7 @@ const getLabel = (type: ckb.TransactionType) => {
   }
 };
 
-export function TransactonRow({ transaction, symbol }: Props) {
+export function TransactonRow({ transaction, token }: Props) {
   const isPositive =
     transaction.type === ckb.TransactionType.RECEIVE_NATIVE_TOKEN ||
     transaction.type === ckb.TransactionType.RECEIVE_TOKEN;
@@ -46,7 +47,7 @@ export function TransactonRow({ transaction, symbol }: Props) {
           <span className="font-normal leading-snug text-muted-foreground">{format(transaction.timestamp, "P")}</span>
         </label>
         <span className="ml-auto">
-          {(isPositive ? "+ " : "- ") + `${toReadableAmount(transaction.amount)} ${symbol}`}
+          {(isPositive ? "+ " : "- ") + `${formatUnit(transaction.amount, token.tokenDecimal)} ${token.symbol}`}
         </span>
       </Link>
     </Button>

@@ -1,3 +1,4 @@
+import { BI, formatUnit } from "@ckb-lumos/bi";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useTokenBalance } from "@/hooks/useTokenBalance";
 import { useTokenPrice } from "@/hooks/useTokenPrice";
 import { SupportedToken } from "@/lib/models/token";
-import { formatCurrency, mulPrice, toReadableAmount } from "@/lib/utils/amount";
+import { formatCurrency, mulPrice } from "@/lib/utils/amount";
 
 interface Props {
   token: SupportedToken;
@@ -23,7 +24,7 @@ export function TokenRow({ token }: Props) {
   }, [fetchBalance, fetchPrice, token]);
 
   const onClick = () => {
-    navigate(`/main/token/${token.address}?withBack=true`);
+    navigate(`/main/token/${token.id}?withBack=true`);
   };
 
   return (
@@ -37,9 +38,9 @@ export function TokenRow({ token }: Props) {
         <p className="text-xs font-semibold text-muted-foreground">{formatCurrency(price ?? 0, 4)}</p>
       </div>
       <div className="flex flex-col items-end">
-        <p className="text-base">{toReadableAmount(balance.total)}</p>
+        <p className="text-base">{formatUnit(balance.total, token.tokenDecimal)}</p>
         <p className="text-xs font-semibold text-muted-foreground">
-          {formatCurrency(mulPrice(price ?? 0, balance.total))}
+          {formatCurrency(mulPrice(price ?? 0, BI.from(balance.total).div(BI.from(10 ** token.tokenDecimal))))}
         </p>
       </div>
     </Button>

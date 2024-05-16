@@ -2,6 +2,7 @@ import LedgerDevice from "./hardware/ledger";
 import CellService from "./services/cell-service";
 import DaoService from "./services/dao-service";
 import TransactionService from "./services/transaction-service";
+import XUDTService from "./services/xudt-service";
 
 export * from "./address";
 export * from "./config";
@@ -13,4 +14,10 @@ export * from "./types/transaction";
 export * from "./types/xudt";
 export * from "./utils";
 
-export { CellService, DaoService, LedgerDevice, TransactionService };
+export {
+  CellService,
+  DaoService,
+  LedgerDevice,
+  TransactionService,
+  XUDTService,
+};

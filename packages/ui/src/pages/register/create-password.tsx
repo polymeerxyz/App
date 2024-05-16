@@ -104,7 +104,7 @@ export default function CreatePasswordPage() {
                 className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 {"I agree to the "}
-                <Button variant="link" asChild className="p-0">
+                <Button className="p-0" variant="link" asChild>
                   <Link to="/terms-of-service">Terms of Service</Link>
                 </Button>
               </label>

@@ -5,9 +5,7 @@ import { RPC } from "@ckb-lumos/rpc";
 import { getConfig } from "../src/ckb/config";
 import fixtures from "./fixtures.json";
 
-const mainnet = false;
-
-export const ckb = (() => {
+export const getCommon = (mainnet: boolean) => {
   const url = mainnet
     ? "https://mainnet.ckbapp.dev/"
     : "https://testnet.ckbapp.dev/";
@@ -23,4 +21,4 @@ export const ckb = (() => {
       ? ExtendedPrivateKey.parse(fixtures.privateKey)
       : undefined,
   };
-})();
+};

@@ -26,6 +26,13 @@ export const useTransactionService = () => {
   return useRef(new ckb.TransactionService(config, indexer, rpc));
 };
 
+export const useXUDTService = () => {
+  const {
+    ckb: { config, indexer, rpc },
+  } = useAppContext();
+  return useRef(new ckb.XUDTService(config, indexer, rpc));
+};
+
 export const useLedgerDevice = () => {
   const { rpcUrl, type } = useNetworkStore((s) => s.config.nervosnetwork);
   return useCallback(() => getLedgerDevice(type === "mainnet", rpcUrl), [rpcUrl, type]);

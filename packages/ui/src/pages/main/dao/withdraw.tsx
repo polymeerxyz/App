@@ -1,3 +1,4 @@
+import { formatUnit } from "@ckb-lumos/bi";
 import { ckb } from "@polymeerxyz/lib";
 import { ExternalLink, Loader2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -11,7 +12,6 @@ import { useLedgerDaoUnlock } from "@/hooks/useLedgerDaoUnlock";
 import { useLedgerDaoWithdraw } from "@/hooks/useLedgerDaoWithdraw";
 import { useLocalDaoUnlock } from "@/hooks/useLocalDaoUnlock";
 import { useLocalDaoWithdraw } from "@/hooks/useLocalDaoWithdraw";
-import { toReadableAmount } from "@/lib/utils/amount";
 import { useLockStore } from "@/stores/lock";
 import { useWalletStore } from "@/stores/wallet";
 
@@ -80,7 +80,7 @@ export default function WithdrawPage() {
           </Avatar>
           <div className="flex flex-1 flex-col items-start space-y-1">
             <p className="text-lg font-semibold">CKB</p>
-            <p className="text-sm">{`${toReadableAmount(searchParams.get("amount") ?? "0")} CKB`}</p>
+            <p className="text-sm">{`${formatUnit(searchParams.get("amount") ?? "0", "ckb")} CKB`}</p>
           </div>
           <Button size="icon" variant="ghost" asChild>
             <Link target="_blank" to={explorerLink}>

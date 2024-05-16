@@ -2,7 +2,6 @@ import { useLayoutEffect } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import { openTab } from "@/lib/utils/extension";
-import LockPage from "@/pages/lock/lock";
 import { MainContextProvider } from "@/pages/main/context";
 import DaoPage from "@/pages/main/dao";
 import DepositPage from "@/pages/main/dao/deposit";
@@ -58,7 +57,6 @@ export function MainRoute() {
           <Route path="create-password" element={<CreatePasswordPage />} />
           <Route path="do-onboarding" element={<DoOnboardingPage />} />
         </Route>
-        <Route path="/lock" element={<LockPage />} />
         <Route
           path="/main"
           element={

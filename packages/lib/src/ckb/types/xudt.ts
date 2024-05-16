@@ -25,3 +25,14 @@ export const XUDTWitness = table(
   },
   ["owner_script", "owner_signature", "raw_extension_data", "extension_data"],
 );
+
+export type XUDT = {
+  // XUDT id is the hash of the type script
+  id: string;
+  decimal: number;
+  name: string;
+  symbol: string;
+  xudtArgs: string;
+  xudtCodeHash: string;
+  xudtTypeHash: string;
+};

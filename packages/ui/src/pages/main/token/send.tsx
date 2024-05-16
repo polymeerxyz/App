@@ -1,8 +1,8 @@
-import { parseUnit } from "@ckb-lumos/bi";
+import { formatUnit, parseUnit } from "@ckb-lumos/bi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ckb } from "@polymeerxyz/lib";
 import { Loader2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
@@ -14,7 +14,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLedgerTransfer } from "@/hooks/useLedgerTransfer";
 import { useLocalTransfer } from "@/hooks/useLocalTransfer";
 import { useTokenInfo } from "@/hooks/useTokenInfo";
-import { toReadableAmount } from "@/lib/utils/amount";
 import { useLockStore } from "@/stores/lock";
 import { useWalletStore } from "@/stores/wallet";
 
@@ -42,9 +41,13 @@ export default function SendPage() {
   const lock = useLockStore((s) => s.lock);
   const activeWallet = useWalletStore((s) => s.getActiveWallet("nervosnetwork"));
   const params = useParams();
-  const { balance, token } = useTokenInfo(params.id!);
+  const { balance, token, fetch: fetchInfo } = useTokenInfo(params.id!);
   const ledgerTransfer = useLedgerTransfer();
   const localTransfer = useLocalTransfer();
+
+  useEffect(() => {
+    fetchInfo();
+  }, [fetchInfo]);
 
   const isLocal = useMemo(
     () => activeWallet!.type === "private-key" || activeWallet!.type === "mnemonic",
@@ -128,10 +131,10 @@ export default function SendPage() {
                         size="sm"
                         onClick={(e) => {
                           e.preventDefault();
-                          form.setValue("amount", toReadableAmount(balance.available));
+                          form.setValue("amount", formatUnit(balance.available, token!.tokenDecimal));
                         }}
                       >
-                        {`Max: ${toReadableAmount(balance.available)} ${token?.symbol ?? ""}`}
+                        {`Max: ${formatUnit(balance.available, token!.tokenDecimal)} ${token?.symbol ?? ""}`}
                       </Button>
                     </div>
                     <FormMessage />

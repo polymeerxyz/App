@@ -5,16 +5,17 @@ import test from "ava";
 import { publicKeyToAddress } from "../src/ckb/address";
 import DaoService from "../src/ckb/services/dao-service";
 import { FeeRate } from "../src/ckb/types/fee";
-import { ckb } from "./common";
+import { getCommon } from "./common";
 
 test.skip("deposit Dao", async (t) => {
-  const daoService = new DaoService(ckb.config, ckb.indexer, ckb.rpc);
+  const common = getCommon(true);
+  const daoService = new DaoService(common.config, common.indexer, common.rpc);
 
   const address = publicKeyToAddress(
-    ckb.extendedPrivateKey!.toAccountExtendedPublicKey(),
+    common.extendedPrivateKey!.toAccountExtendedPublicKey(),
     AddressType.Receiving,
     0,
-    ckb.config,
+    common.config,
   );
 
   const txSkeleton = await daoService.deposit({
@@ -24,7 +25,8 @@ test.skip("deposit Dao", async (t) => {
   });
 
   const tx = await daoService.signWithPrivateKeys(txSkeleton, [
-    ckb.extendedPrivateKey!.privateKeyInfo(AddressType.Receiving, 0).privateKey,
+    common.extendedPrivateKey!.privateKeyInfo(AddressType.Receiving, 0)
+      .privateKey,
   ]);
 
   const hash = await daoService.send(tx);

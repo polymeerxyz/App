@@ -1,4 +1,6 @@
+import { formatUnit } from "@ckb-lumos/bi";
 import { ArrowDownCircle, ArrowUpCircle, Link2 } from "lucide-react";
+import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -6,16 +8,22 @@ import { Button } from "@/components/ui/button";
 import { useActiveAddress } from "@/hooks/useActiveAddress";
 import { useGetExplorerLink } from "@/hooks/useGetExplorerLink";
 import { useTokenInfo } from "@/hooks/useTokenInfo";
-import { toReadableAmount } from "@/lib/utils/amount";
 import { TransactonRow } from "@/pages/main/token/transaction-row";
 
 export default function TokenPage() {
   const navigate = useNavigate();
   const params = useParams();
-  const { balance, token, transactions } = useTokenInfo(params.id!, true);
+  const { balance, token, transactions, fetch: fetchInfo } = useTokenInfo(params.id!, true);
 
   const { full: activeAddress } = useActiveAddress();
-  const explorerLink = useGetExplorerLink(activeAddress, "address");
+  const explorerLink = useGetExplorerLink(
+    token?.id === "ckb" ? activeAddress : token?.id,
+    token?.id === "ckb" ? "address" : "xudt",
+  );
+
+  useEffect(() => {
+    fetchInfo();
+  }, [fetchInfo]);
 
   return token ? (
     <div className="flex flex-col space-y-4 p-4">
@@ -26,18 +34,18 @@ export default function TokenPage() {
         </Avatar>
         <div className="flex flex-1 flex-col items-start space-y-1">
           <p className="text-lg font-semibold">{token.name}</p>
-          <p className="text-sm">{`${toReadableAmount(balance.total)} ${token.symbol.toUpperCase()}`}</p>
+          <p className="text-sm">{`${formatUnit(balance.total, token!.tokenDecimal)} ${token.symbol.toUpperCase()}`}</p>
         </div>
       </div>
       {token.symbol === "CKB" && (
         <div className="rounded-lg bg-secondary-foreground/85 p-2 text-xs text-secondary">
           <div className="flex flex-1 justify-between">
             <p>Available</p>
-            <p className="font-medium">{`${toReadableAmount(balance.available)} ${token.symbol.toUpperCase()}`}</p>
+            <p className="font-medium">{`${formatUnit(balance.available, token!.tokenDecimal)} ${token.symbol.toUpperCase()}`}</p>
           </div>
           <div className="flex flex-1 justify-between">
             <p>Occupied</p>
-            <p className="font-medium">{`${toReadableAmount(balance.total.sub(balance.available))} ${token.symbol.toUpperCase()}`}</p>
+            <p className="font-medium">{`${formatUnit(balance.total.sub(balance.available), token!.tokenDecimal)} ${token.symbol.toUpperCase()}`}</p>
           </div>
         </div>
       )}
@@ -59,7 +67,7 @@ export default function TokenPage() {
       </div>
       <div className="flex flex-col space-y-2">
         {transactions.map((transaction) => (
-          <TransactonRow key={transaction.hash} transaction={transaction} symbol={token.symbol.toUpperCase()} />
+          <TransactonRow key={transaction.hash} transaction={transaction} token={token} />
         ))}
       </div>
     </div>

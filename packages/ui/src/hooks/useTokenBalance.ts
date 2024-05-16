@@ -15,7 +15,7 @@ export const useTokenBalance = () => {
 
   const fetch = useCallback(
     async (token: SupportedToken) => {
-      if (token.address === "ckb") {
+      if (token.id === "ckb") {
         const { availableAmount, collectedSum } = await cellService.current.getNativeCapacity(activeAddress);
         setResult({ total: collectedSum, available: availableAmount });
       } else if (token.xudtArgs) {

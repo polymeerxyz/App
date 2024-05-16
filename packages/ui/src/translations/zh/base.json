@@ -27,7 +27,10 @@
     "unlock_current_wallet": "解锁当前钱包",
     "enter_password_to_unlock": "输入密码以解锁<1>{{name}}</1>",
     "password": "密码",
-    "confirm": "确认"
+    "confirm": "确认",
+    "add_token": "添加令牌",
+    "custom_token": "自定义令牌",
+    "input_xudt_args": "输入XUDT参数"
   },
   "version_note": "版本：{{version}} - {{env}}"
 }

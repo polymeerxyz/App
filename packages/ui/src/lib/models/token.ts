@@ -1,10 +1,9 @@
 export interface BaseToken {
+  id: string;
   name: string;
   symbol: string;
-  address: string;
-  supply: number;
   tokenDecimal: number;
-  logoURI: string;
+  logoURI?: string;
 }
 
 export interface XUDT extends BaseToken {

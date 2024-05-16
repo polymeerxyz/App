@@ -2,8 +2,7 @@
   "name": "@polymeerxyz/app",
   "version": "1.0.0",
   "scripts": {
-    "package:ui": "node -r ts-node/register ./src/package.ts",
-    "upload:ui": "node -r ts-node/register ./src/upload.ts"
+    "package:ui": "node -r ts-node/register ./src/package.ts"
   },
   "devDependencies": {
     "@types/node": "^20",

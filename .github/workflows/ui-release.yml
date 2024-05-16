@@ -35,11 +35,10 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
-      - name: Package and upload
+      - name: Build and package
         run: |
           echo ${{ github.sha }} > Release.txt
-          make package-ui version=${{ github.ref_name }}
-          make upload-ui clientId=${{ secrets.WEBSTORE_CLIENT_ID }} clientSecret=${{ secrets.WEBSTORE_CLIENT_SECRET }} refreshToken=${{ secrets.WEBSTORE_REFRESH_TOKEN }}
+          make package-ui commit=${{ github.sha }} version=${{ github.ref_name }}
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')

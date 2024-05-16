@@ -25,8 +25,7 @@ const useWalletStoreBase = create<WalletState>()(
       wallet: { nervosnetwork: { wallets: [], activeWalletId: "" } },
       setActiveWalletId: (chain: SupportedChain, value: string) => {
         set((state) => {
-          const { wallets } = state.wallet[chain];
-          const hasWallet = wallets.findIndex((el) => el.id === value) !== -1;
+          const hasWallet = state.wallet[chain].wallets.findIndex((el) => el.id === value) !== -1;
           if (hasWallet) state.wallet[chain].activeWalletId = value;
         });
       },
@@ -36,9 +35,8 @@ const useWalletStoreBase = create<WalletState>()(
       },
       addWallet: (chain: SupportedChain, value: WalletInfo) => {
         set((state) => {
-          const { wallets } = state.wallet[chain];
           state.wallet[chain].activeWalletId = value.id;
-          state.wallet[chain].wallets = [...wallets, value];
+          state.wallet[chain].wallets = [...state.wallet[chain].wallets, value];
         });
       },
       removeWallet: (chain: SupportedChain, value: string) => {

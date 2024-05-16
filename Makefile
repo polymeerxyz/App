@@ -19,11 +19,7 @@ help:
 package-ui:
 > rm -rf dist
 > pnpm run package:ui --version $(version)
-> pnpm run --filter=@polymeerxyz/hardware --filter=@polymeerxyz/lib --filter=@polymeerxyz/ui build
-> pnpm deploy --filter=@polymeerxyz/ui --prod ./dist
+> pnpm --filter=@polymeerxyz/hardware --filter=@polymeerxyz/lib --filter=@polymeerxyz/ui run build
+> pnpm --filter=@polymeerxyz/ui --prod deploy ./dist
 > cd ./dist/dist && zip -r polymeerxyz.zip .
 > mv -f ./polymeerxyz.zip ../..
-
-.PHONY: upload-ui
-upload-ui:
-> pnpm run upload:ui --clientId $(clientId) --clientSecret $(clientSecret) --refreshToken $(refreshToken)
