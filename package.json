@@ -2,10 +2,10 @@
   "name": "@polymeerxyz/app",
   "version": "1.0.0",
   "scripts": {
-    "commit": "commit",
     "package:ui": "node -r ts-node/register ./src/package.ts"
   },
   "devDependencies": {
+    "@changesets/cli": "^2",
     "@commitlint/cli": "^19",
     "@commitlint/config-conventional": "^19",
     "@commitlint/prompt-cli": "^19",
