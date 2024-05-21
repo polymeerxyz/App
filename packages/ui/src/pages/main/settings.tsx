@@ -1,10 +1,12 @@
 import { Moon, Sun } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import browser from "webextension-polyfill";
 
 import MenuButton from "@/components/button/menu-button";
 import LanguageDialog from "@/components/dialog/language-dialog";
 import NetworkDialog from "@/components/dialog/network-dialog";
+import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/theme";
 import { openExtensionInBrowser } from "@/lib/utils/extension";
 
@@ -34,9 +36,21 @@ export default function SettingsPage() {
           leftIcon={theme === "dark" ? Sun : Moon}
         />
       </div>
-      <div className="font-semi-bold self-center text-xs text-foreground/40">
-        <p>{t("version_note", { version, env: import.meta.env.MODE })}</p>
-      </div>
+      <Button className="font-semi-bold self-center p-0 text-xs text-foreground/40" variant="link" asChild>
+        <Link
+          to={
+            import.meta.env.VITE_COMMIT
+              ? `https://github.com/polymeerxyz/app/commit/${import.meta.env.VITE_COMMIT}`
+              : "#"
+          }
+          target="_blank"
+        >
+          {t("version_note", {
+            version,
+            env: import.meta.env.MODE,
+          })}
+        </Link>
+      </Button>
     </div>
   );
 }

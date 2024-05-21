@@ -83,7 +83,7 @@ export default function WithdrawPage() {
             <p className="text-sm">{`${formatUnit(searchParams.get("amount") ?? "0", "ckb")} CKB`}</p>
           </div>
           <Button size="icon" variant="ghost" asChild>
-            <Link target="_blank" to={explorerLink}>
+            <Link to={explorerLink} target="_blank">
               <ExternalLink className="h-4 w-4" />
             </Link>
           </Button>
